@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>待办事项</title>
+	<meta charset="utf-8">
+</head>
+<body>
+    <input type="text" id="text">
+    <input type="button" value="添加" id="add">
+    <div>
+    	<h2>待办事项</h2>
+    	<ul id="list">
+    		
+    	</ul>
+    	<input type="button" value="选择全部" id="selectAll">
+    	<input type="button" value="删除全部" id="removeAll">
+    	<input type="button" value="删除" id="remove">
+    </div>
+    <script type="text/javascript">
+    	
+    window.onload = function () {
+    	function ById(id){
+	             return typeof(id)==="string"?document.getElementById(id):id;
+        }
+        var input = ById("text"),
+            add = ById("add"),
+            selectAll = ById("selectAll"),
+            removeAll = ById("removeAll"),
+            remove = ById("remove"),
+            list = ById("list");
+        add.onclick = function(){
+        	var inputValue = input.value;
+            var li;
+            if (inputValue) {
+            	li = document.createElement('li');
+            	li.innerHTML='<input type="checkbox"/>'+input.value;
+            	input.value = '';
+            	list.appendChild(li);
+            }
+        };
+        selectAll.onclick = function(){
+        	var inputed = list.getElementsByTagName('input');
+        	var ck;
+        	for(var i = 0;i <inputed.length;i++ ){
+             ck = inputed[i];
+             if (!ck.checked) {
+             	ck.checked = true;
+             }
+        	}
+        };
+        remove.onclick = function () {
+           var inputed = list.getElementsByTagName('input');
+           
+           var ck;
+           var li;
+           for (var i = inputed.length-1; i >= 0; i--) {
+           ck = inputed[i];
+           if(ck.checked) {
+           li = ck.parentNode;//parentNode 获取文档层次中的父对象,parentElement 获取对象层次中的父对象。
+           li.parentNode.removeChild(li);
+           }
+        }
+    };
+ 
+ 
+           removeAll.onclick = function () {
+            list.innerHTML = '';
+    };
+}
+
+ 
+    </script>
+</body>
+</html>
