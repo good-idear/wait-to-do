@@ -19,7 +19,8 @@
     <script type="text/javascript">
     	
     window.onload = function () {
-    	function ById(id){
+    	//封装一个取出 id 的函数
+	    function ById(id){
 	             return typeof(id)==="string"?document.getElementById(id):id;
         }
         var input = ById("text"),
